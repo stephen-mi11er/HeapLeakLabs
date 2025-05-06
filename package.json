@@ -1,0 +1,13 @@
+{
+  "name": "employee-salary-manager",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "frontend:build": "yarn workspace @employee-salary-manager/frontend build",
+    "frontend:dev": "yarn workspace @employee-salary-manager/frontend dev"
+  },
+  "workspaces": [
+    "packages/**/*"
+  ],
+  "packageManager": "yarn@4.6.0"
+}
