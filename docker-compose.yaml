@@ -4,9 +4,20 @@ services:
 
   frontend:
     container_name: frontend
+    depends_on:
+      - database
     build:
       dockerfile: packages/web/frontend/Dockerfile
       context: .
+    develop:
+      watch:
+        - action: sync
+          path: packages/web/frontend
+          target: /app/packages/web/frontend
+          ignore:
+            - node_modules
+        - action: rebuild
+          path: package.json
     environment:
       - HOST=0.0.0.0
       - PORT=4321
