@@ -15,4 +15,32 @@ services:
     volumes:
       - /app/node_modules
     command: yarn frontend:dev
+
+  database:
+    container_name: database
+    image: 'postgres:17.4'
+    ports:
+      - 15432:5432
+    env_file:
+      - .env
+    volumes:
+      - db:/var/lib/postgresql/data/
+      - ./packages/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  pgadmin:
+    image: dpage/pgadmin4:9.3
+    ports:
+      - 15433:80
+    env_file:
+      - .env
+    depends_on:
+      - database
+    volumes:
+      - admin-db:/var/lib/pgadmin/
+
+volumes:
+  db:
+    driver: local
+  admin-db:
+    driver: local
     

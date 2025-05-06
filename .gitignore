@@ -12,3 +12,7 @@ node_modules/
 .env
 /certbot/
 certs
+
+# database
+/db-data/
+/pgadmin-data/
