@@ -17,16 +17,15 @@ services:
     command: yarn frontend:dev
 
   database:
+    container_name: database
     image: 'postgres:17.4'
     ports:
       - 15432:5432
     env_file:
       - .env
-    networks:
-      - postgres-network
     volumes:
-      - ${PWD}/db-data/:/var/lib/postgresql/data/
-      - ${PWD}/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db:/var/lib/postgresql/data/
+      - ./packages/database/init.sql:/docker-entrypoint-initdb.d/init.sql
   
   pgadmin:
     image: dpage/pgadmin4:9.3
@@ -36,12 +35,12 @@ services:
       - .env
     depends_on:
       - database
-    networks:
-      - postgres-network
     volumes:
-      - ${PWD}/pgadmin-data/:/var/lib/pgadmin/
+      - admin-db:/var/lib/pgadmin/
 
-networks: 
-  postgres-network:
-    driver: bridge
+volumes:
+  db:
+    driver: local
+  admin-db:
+    driver: local
     
