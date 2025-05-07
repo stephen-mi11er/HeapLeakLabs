@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { toast } from "sonner";
 import { Eye, EyeOff, Building2, KeyRound } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { loginUser } from "./action";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -17,8 +18,12 @@ export default function LoginPage() {
 
   // Redirect if already logged in
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    console.log({formData});
+    
     
     if (!email || !password) {
       toast.error("Please enter both email and password");
@@ -26,6 +31,9 @@ export default function LoginPage() {
     }
     
     setIsLoading(true);
+    const result = await loginUser(formData);
+    console.log({result});
+    
     
     // try {
     //   const result = await login(email, password);
@@ -82,6 +90,7 @@ export default function LoginPage() {
               <Input
                 id="email"
                 type="email"
+                name="email"
                 placeholder="you@company.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -93,6 +102,7 @@ export default function LoginPage() {
               <div className="relative">
                 <Input
                   id="password"
+                  name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
                   value={password}

@@ -4,8 +4,8 @@ import type { NextRequest } from 'next/server'
 const protectedRoutes = ['/', '/admin', '/user']
  
 export function middleware(request: NextRequest) {
-  const authCookie = request.cookies.get('auth-storage')
-  let isAuthenticated = false;
+  //const authCookie = request.cookies.get('auth-storage')
+  const isAuthenticated = false;
 
   const isProtectedRoute = protectedRoutes.some(route => 
     request.nextUrl.pathname === route || 
