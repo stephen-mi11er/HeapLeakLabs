@@ -29,17 +29,19 @@ import { getCookie } from 'cookies-next/client';
 import type { User } from "@/lib/index"
 
 export default function EmployeePage() {
-  const [employeeData, setEmployeeData] = useState<Employee | undefined>(undefined);
-  const userCookie = getCookie(Auth.userSessionCookie);
-  const user: User = JSON.parse(userCookie as string);
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const [employee, setEmployee] = useState<Employee | undefined>(undefined);
   
   
   useEffect(() => {
-    const employee = EmployeeService.GetEmployee(user.eid);
-    setEmployeeData(employee);
-  }, [user]);
+    const userCookie = getCookie(Auth.userSessionCookie);
+    const effectUser = JSON.parse(userCookie as string);
+    const effectEmployee = EmployeeService.GetEmployee(effectUser.eid);
+    setUser(effectUser);
+    setEmployee(effectEmployee);
+  }, []);
 
-  if (!employeeData) {
+  if (!employee) {
     return (
         <div className="flex min-h-screen flex-col">
           <Header user={user}/>
@@ -54,11 +56,11 @@ export default function EmployeePage() {
   }
 
   const payPeriods = [
-    { date: "Apr 1, 2025", amount: employeeData.salary / 12 },
-    { date: "Mar 1, 2025", amount: employeeData.salary / 12 },
-    { date: "Feb 1, 2025", amount: employeeData.salary / 12 },
-    { date: "Jan 1, 2025", amount: employeeData.salary / 12 },
-    { date: "Dec 1, 2024", amount: employeeData.salary / 12 }
+    { date: "Apr 1, 2025", amount: employee.salary / 12 },
+    { date: "Mar 1, 2025", amount: employee.salary / 12 },
+    { date: "Feb 1, 2025", amount: employee.salary / 12 },
+    { date: "Jan 1, 2025", amount: employee.salary / 12 },
+    { date: "Dec 1, 2024", amount: employee.salary / 12 }
   ];
 
   return (
@@ -80,15 +82,15 @@ export default function EmployeePage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <CardTitle className="text-2xl">
-                        Welcome, {employeeData.nickname || employeeData.name.split(' ')[0]}
+                        Welcome, {employee.nickname || employee.name.split(' ')[0]}
                       </CardTitle>
                       <CardDescription>
-                        Employee ID: {employeeData.eid}
+                        Employee ID: {employee.eid}
                       </CardDescription>
                     </div>
                     <div className="hidden sm:block">
                       <Badge variant="outline" className="text-green-600 border-green-600">
-                        {employeeData.status.charAt(0).toUpperCase() + employeeData.status.slice(1)}
+                        {employee.status.charAt(0).toUpperCase() + employee.status.slice(1)}
                       </Badge>
                     </div>
                   </div>
@@ -100,7 +102,7 @@ export default function EmployeePage() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Annual Salary</p>
-                      <p className="font-medium">{Utils.FormatCurrency(employeeData.salary)}</p>
+                      <p className="font-medium">{Utils.FormatCurrency(employee.salary)}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 rounded-md border p-3">
@@ -109,7 +111,7 @@ export default function EmployeePage() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Department</p>
-                      <p className="font-medium">{employeeData.department}</p>
+                      <p className="font-medium">{employee.department}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 rounded-md border p-3">
@@ -118,7 +120,7 @@ export default function EmployeePage() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Position</p>
-                      <p className="font-medium">{employeeData.position}</p>
+                      <p className="font-medium">{employee.position}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 rounded-md border p-3">
@@ -127,7 +129,7 @@ export default function EmployeePage() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Hire Date</p>
-                      <p className="font-medium">{employeeData.hireDate}</p>
+                      <p className="font-medium">{employee.hireDate}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 rounded-md border p-3 md:col-span-2 lg:col-span-2">
@@ -136,7 +138,7 @@ export default function EmployeePage() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Contact Information</p>
-                      <p className="font-medium">{employeeData.email}</p>
+                      <p className="font-medium">{employee.email}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -160,20 +162,20 @@ export default function EmployeePage() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <p className="text-sm text-muted-foreground">Base Salary</p>
-                      <p className="text-sm font-medium">{Utils.FormatCurrency(employeeData.salary / 12)}</p>
+                      <p className="text-sm font-medium">{Utils.FormatCurrency(employee.salary / 12)}</p>
                     </div>
                     <div className="flex justify-between">
                       <p className="text-sm text-muted-foreground">Benefits</p>
-                      <p className="text-sm font-medium">{Utils.FormatCurrency(employeeData.salary * 0.05 / 12)}</p>
+                      <p className="text-sm font-medium">{Utils.FormatCurrency(employee.salary * 0.05 / 12)}</p>
                     </div>
                     <div className="flex justify-between">
                       <p className="text-sm text-muted-foreground">Deductions</p>
-                      <p className="text-sm font-medium text-destructive">-{Utils.FormatCurrency(employeeData.salary * 0.2 / 12)}</p>
+                      <p className="text-sm font-medium text-destructive">-{Utils.FormatCurrency(employee.salary * 0.2 / 12)}</p>
                     </div>
                     <Separator className="my-2" />
                     <div className="flex justify-between">
                       <p className="font-semibold">Net Pay</p>
-                      <p className="font-semibold">{Utils.FormatCurrency(employeeData.salary * 0.85 / 12)}</p>
+                      <p className="font-semibold">{Utils.FormatCurrency(employee.salary * 0.85 / 12)}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -253,31 +255,31 @@ export default function EmployeePage() {
                         <div className="space-y-1">
                           <p className="text-sm font-medium">Full Name</p>
                           <p className="text-sm text-muted-foreground">
-                            {employeeData.name}
+                            {employee.name}
                           </p>
                         </div>
                         <div className="space-y-1">
                           <p className="text-sm font-medium">Email Address</p>
                           <p className="text-sm text-muted-foreground">
-                            {employeeData.email}
+                            {employee.email}
                           </p>
                         </div>
                         <div className="space-y-1">
                           <p className="text-sm font-medium">Date of Birth</p>
                           <p className="text-sm text-muted-foreground">
-                            {employeeData.birth}
+                            {employee.birth}
                           </p>
                         </div>
                         <div className="space-y-1">
                           <p className="text-sm font-medium">Social Security Number</p>
                           <p className="text-sm text-muted-foreground">
-                            {employeeData.ssn.slice(0, -4).replace(/\d/g, '*') + employeeData.ssn.slice(-4)}
+                            {employee.ssn.slice(0, -4).replace(/\d/g, '*') + employee.ssn.slice(-4)}
                           </p>
                         </div>
                         <div className="space-y-1 md:col-span-2">
                           <p className="text-sm font-medium">Home Address</p>
                           <p className="text-sm text-muted-foreground">
-                            {employeeData.address}
+                            {employee.address}
                           </p>
                         </div>
                       </div>

@@ -19,14 +19,12 @@ import { Auth, type User } from "@/lib/index";
 import { deleteCookie } from "cookies-next/client";
 
 interface HeaderProps{
-  user: User
+  user: User | undefined
 }
 
 export function Header({user}: HeaderProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  console.log({user});
-  
   
   const handleLogout = () => {
     deleteCookie(Auth.userSessionCookie);

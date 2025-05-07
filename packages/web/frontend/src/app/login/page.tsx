@@ -19,7 +19,6 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   // Redirect if already logged in
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -33,7 +32,6 @@ export default function LoginPage() {
     const result = await loginUser(formData);
 
     if(result.success && result.user){
-      //router.push(result.user.role == "admin" ? "/admin" : "employee");
       router.refresh(); 
     }
   };
