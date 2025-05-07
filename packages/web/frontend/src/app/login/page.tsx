@@ -9,8 +9,10 @@ import { toast } from "sonner";
 import { Eye, EyeOff, Building2, KeyRound } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { loginUser } from "./action";
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
+  const router = useRouter()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -32,23 +34,11 @@ export default function LoginPage() {
     
     setIsLoading(true);
     const result = await loginUser(formData);
-    console.log({result});
-    
-    
-    // try {
-    //   const result = await login(email, password);
-      
-    //   if (result.success) {
-    //     toast.success(result.message);
-    //     router.push(user?.role === "admin" ? "/admin" : "/employee");
-    //   } else {
-    //     toast.error(result.message);
-    //   }
-    // } catch (error) {
-    //   toast.error("An error occurred during login");
-    // } finally {
-    //   setIsLoading(false);
-    // }
+
+    if(result.success && result.user){
+      //router.push(result.user.role == "admin" ? "/admin" : "employee");
+      router.refresh();
+    }
   };
 
   // Demo credentials

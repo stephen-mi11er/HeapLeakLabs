@@ -1,14 +1,12 @@
 "use server";
 
-import { Auth } from "@/lib/index";
+import { Auth, User } from "@/lib/index";
 import { cookies } from "next/headers";
 
 export async function loginUser(formData: FormData) {
   try {
     const email = formData.get("email")?.toString();
     const password = formData.get("password")?.toString();
-
-    console.log({email, password});
 
     if (!email || !password) {
       return { success: false, message: "Email and password are required" };
@@ -22,7 +20,13 @@ export async function loginUser(formData: FormData) {
 
     // Set session or token logic here (e.g., JWT, cookies, etc.)
     const cookieStore = await cookies();
-    cookieStore.set(Auth.userSessionCookie, JSON.stringify({eid: user.eid}), {
+    cookieStore.set(Auth.userSessionCookie, JSON.stringify(
+        {
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            eid: user.eid
+        } satisfies User), {
         sameSite: "strict",
     });
 

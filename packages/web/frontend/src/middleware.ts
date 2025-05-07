@@ -1,22 +1,32 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { Auth, User } from '@/lib/index';
 
-const protectedRoutes = ['/', '/admin', '/user']
+const protectedRoutes = ['/', '/admin', '/employee']
  
 export function middleware(request: NextRequest) {
-  //const authCookie = request.cookies.get('auth-storage')
-  const isAuthenticated = false;
+  const pathname = request.nextUrl.pathname;
+  const authCookie = request.cookies.get(Auth.userSessionCookie)
+  const user: User = authCookie?.value ? JSON.parse(authCookie.value) : undefined;
 
   const isProtectedRoute = protectedRoutes.some(route => 
-    request.nextUrl.pathname === route || 
-    request.nextUrl.pathname.startsWith(`${route}/`)
+    pathname === route || 
+    pathname.startsWith(`${route}/`)
   )
 
-  if(isProtectedRoute && !isAuthenticated){
+  if(isProtectedRoute && !user){
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  return NextResponse.next();
+  if(user?.role == "admin" && pathname != "/admin"){
+    return NextResponse.redirect(new URL('/admin', request.url));
+  }
+
+  if(user?.role == "employee" && pathname != "/employee"){
+    return NextResponse.redirect(new URL('/employee', request.url));
+  }
+
+  return NextResponse.next()
 }
  
 export const config = {

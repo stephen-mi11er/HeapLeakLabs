@@ -2,7 +2,7 @@ type User = {
   name: string;
   email: string;
   role: 'admin' | 'employee';
-  eid?: string;
+  eid: string;
 };
 
 
@@ -20,6 +20,7 @@ type Employee = {
   department: string;
   position: string;
   hireDate: string;
+  role: 'admin' | 'employee';
   status: 'active' | 'inactive' | 'on leave';
 };
 
@@ -40,6 +41,7 @@ const employees: Employee[] = [
     position: 'Senior Developer',
     hireDate: '2018-03-15',
     status: 'active',
+    role: "employee"
   },
   {
     id: '2',
@@ -56,6 +58,7 @@ const employees: Employee[] = [
     position: 'Marketing Manager',
     hireDate: '2019-05-10',
     status: 'active',
+    role: "employee"
   },
   {
     id: '3',
@@ -72,6 +75,7 @@ const employees: Employee[] = [
     position: 'Sales Representative',
     hireDate: '2020-01-05',
     status: 'active',
+    role: "employee"
   },
   {
     id: '4',
@@ -88,6 +92,7 @@ const employees: Employee[] = [
     position: 'Lead Developer',
     hireDate: '2017-09-20',
     status: 'active',
+    role: "employee"
   },
   {
     id: '5',
@@ -104,6 +109,7 @@ const employees: Employee[] = [
     position: 'HR Specialist',
     hireDate: '2021-02-15',
     status: 'on leave',
+    role: "employee"
   },
   {
     id: '6',
@@ -120,6 +126,7 @@ const employees: Employee[] = [
     position: 'Financial Analyst',
     hireDate: '2019-10-12',
     status: 'active',
+    role: "employee"
   },
   {
     id: '7',
@@ -136,6 +143,7 @@ const employees: Employee[] = [
     position: 'Support Specialist',
     hireDate: '2020-07-08',
     status: 'active',
+    role: "employee"
   },
   {
     id: '8',
@@ -152,6 +160,7 @@ const employees: Employee[] = [
     position: 'Research Director',
     hireDate: '2016-11-30',
     status: 'inactive',
+    role: "employee"
   },
   {
     id: '9',
@@ -168,6 +177,7 @@ const employees: Employee[] = [
     position: 'QA Engineer',
     hireDate: '2018-08-22',
     status: 'active',
+    role: "employee"
   },
   {
     id: '10',
@@ -184,6 +194,7 @@ const employees: Employee[] = [
     position: 'Product Manager',
     hireDate: '2017-06-14',
     status: 'active',
+    role: "employee"
   },
   {
     id: '11',
@@ -200,6 +211,7 @@ const employees: Employee[] = [
     position: 'Product Manager',
     hireDate: '2017-06-14',
     status: 'active',
+    role: "admin"
   },
 ];
 
