@@ -23,9 +23,6 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-
-    console.log({formData});
-    
     
     if (!email || !password) {
       toast.error("Please enter both email and password");
@@ -37,7 +34,7 @@ export default function LoginPage() {
 
     if(result.success && result.user){
       //router.push(result.user.role == "admin" ? "/admin" : "employee");
-      router.refresh();
+      router.refresh(); 
     }
   };
 

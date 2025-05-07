@@ -215,5 +215,13 @@ const employees: Employee[] = [
   },
 ];
 
+class EmployeeService {
+  public static GetEmployee(eid: string){
+    return employees.find(
+      (emp: Employee) => emp.eid === eid
+    );
+  }
+}
+
 export type {User, Employee}
-export {employees}
+export {employees, EmployeeService}
