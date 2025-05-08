@@ -41,7 +41,7 @@ export function Header({user}: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-16 items-center justify-between mx-auto">
         <div className="flex items-center gap-2 md:gap-4">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="md:hidden">
@@ -113,13 +113,6 @@ export function Header({user}: HeaderProps) {
                   </p>
                 </div>
               </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => router.push(user?.role === "admin" ? "/admin" : "/employee")}
-              >
-                <LucidUser className="mr-2 h-4 w-4" />
-                <span>Dashboard</span>
-              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut className="mr-2 h-4 w-4" />

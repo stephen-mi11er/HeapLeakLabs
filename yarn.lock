@@ -49,6 +49,7 @@ __metadata:
     "@radix-ui/react-dialog": "npm:^1.1.13"
     "@radix-ui/react-dropdown-menu": "npm:^2.1.14"
     "@radix-ui/react-label": "npm:^2.1.6"
+    "@radix-ui/react-popover": "npm:^1.1.13"
     "@radix-ui/react-select": "npm:^2.2.4"
     "@radix-ui/react-separator": "npm:^1.1.6"
     "@radix-ui/react-slot": "npm:^1.2.2"
@@ -843,6 +844,39 @@ __metadata:
     "@types/react-dom":
       optional: true
   checksum: 10c0/88d5fd986b8d56ce587109507d272f726fd6f45c42886559c1240e868890fc91e3f15e889b69a5db23851c6b576f606cb80640ada6b728261073ee6914fcb422
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-popover@npm:^1.1.13":
+  version: 1.1.13
+  resolution: "@radix-ui/react-popover@npm:1.1.13"
+  dependencies:
+    "@radix-ui/primitive": "npm:1.1.2"
+    "@radix-ui/react-compose-refs": "npm:1.1.2"
+    "@radix-ui/react-context": "npm:1.1.2"
+    "@radix-ui/react-dismissable-layer": "npm:1.1.9"
+    "@radix-ui/react-focus-guards": "npm:1.1.2"
+    "@radix-ui/react-focus-scope": "npm:1.1.6"
+    "@radix-ui/react-id": "npm:1.1.1"
+    "@radix-ui/react-popper": "npm:1.2.6"
+    "@radix-ui/react-portal": "npm:1.1.8"
+    "@radix-ui/react-presence": "npm:1.1.4"
+    "@radix-ui/react-primitive": "npm:2.1.2"
+    "@radix-ui/react-slot": "npm:1.2.2"
+    "@radix-ui/react-use-controllable-state": "npm:1.2.2"
+    aria-hidden: "npm:^1.2.4"
+    react-remove-scroll: "npm:^2.6.3"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/22a0ab372a741b2db9d48e5251104a2c48f6d246c107409a11c7c237dc68a3850d1e7fb626fac79c008958b8067a8c9428e3d0bf8c58b88977494a1c0106a5e3
   languageName: node
   linkType: hard
 
