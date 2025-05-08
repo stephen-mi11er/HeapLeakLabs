@@ -67,7 +67,7 @@ export default function EmployeePage() {
       <div className="flex min-h-screen flex-col">
         <Header user={user}/>
         
-        <main className="container flex-1 py-6">
+        <main className="container flex-1 py-6 mx-auto">
           <div className="flex flex-col space-y-6">
             <div className="flex flex-col space-y-2">
               <h1 className="text-3xl font-bold tracking-tight">Employee Dashboard</h1>
