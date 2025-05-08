@@ -48,7 +48,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-4">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-linear-to-b from-background to-muted p-4">
       <div className="absolute right-4 top-4">
         <ThemeToggle />
       </div>
