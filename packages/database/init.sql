@@ -1,5 +1,5 @@
 -- create a table for credentials
-CREATE TABLE Credential(
+CREATE TABLE Credentials(
   id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name TEXT NOT NULL,
   eid TEXT NOT NULL,
@@ -10,11 +10,11 @@ CREATE TABLE Credential(
   email TEXT NOT NULL,
   nickname TEXT,
   role TEXT NOT NULL,
-  Password TEXT NOT NULL,
+  Password TEXT NOT NULL
 );
 
 -- add fake users
-INSERT INTO Credential (name, eid, salary, birth, ssn, address, email, nickname, role, Password)
+INSERT INTO Credentials (name, eid, salary, birth, ssn, address, email, nickname, role, Password)
   VALUES 
   ('John Doe', 'EID001', 50000, '1985-01-15', '123-45-6789', '123 Elm St', 'johndoe@example.com', 'Johnny', 'employee', 'password123'),
   ('Jane Smith', 'EID002', 60000, '1990-02-20', '987-65-4321', '456 Oak St', 'janesmith@example.com', 'Janey', 'employee', 'securepass'),

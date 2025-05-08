@@ -69,6 +69,7 @@ export default function AdminPage() {
   const [departmentFilter, setDepartmentFilter] = useState<string>("all");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
     const userCookie = getCookie(Auth.userSessionCookie);
