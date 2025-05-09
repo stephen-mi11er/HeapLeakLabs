@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { Auth, User } from '@/lib/index';
+import { Utils } from '@/lib/index';
+import { User } from '@employee-salary-manager/core';
 
 const protectedRoutes = ['/', '/admin', '/employee']
  
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const authCookie = request.cookies.get(Auth.userSessionCookie)
+  const authCookie = request.cookies.get(Utils.USER_SESSION_COOKIE);
   const user: User = authCookie?.value ? JSON.parse(authCookie.value) : undefined;
 
   const isProtectedRoute = protectedRoutes.some(route => 

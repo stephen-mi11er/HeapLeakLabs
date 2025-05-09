@@ -1,6 +1,8 @@
 "use server";
 
-import { Auth, User } from "@/lib/index";
+import { Utils } from "@/lib/utils";
+import { EmployeeHandler } from "@employee-salary-manager/core";
+import type { User } from "@employee-salary-manager/core";
 import { cookies } from "next/headers";
 
 export async function loginUser(formData: FormData) {
@@ -12,25 +14,25 @@ export async function loginUser(formData: FormData) {
       return { success: false, message: "Email and password are required" };
     }
 
-    const user = Auth.VerifyUserCredentials(email as string, password as string);
+    const employee = await EmployeeHandler.VerifyUserCredentials(email as string, password as string);
 
-    if (!user) {
+    if (!employee) {
       return { success: false, message: "Invalid email or password" };
     }
 
     // Set session or token logic here (e.g., JWT, cookies, etc.)
     const cookieStore = await cookies();
-    cookieStore.set(Auth.userSessionCookie, JSON.stringify(
+    cookieStore.set(Utils.USER_SESSION_COOKIE, JSON.stringify(
         {
-            name: user.name,
-            email: user.email,
-            role: user.role,
-            eid: user.eid
+            name: employee.name,
+            email: employee.email,
+            role: employee.role,
+            eid: employee.eid
         } satisfies User), {
         sameSite: "strict",
     });
 
-    return { success: true, message: "Login successful", user };
+    return { success: true, message: "Login successful", employee };
   } catch (error) {
     console.error("Login error:", error);
     return { success: false, message: "An error occurred during login" };

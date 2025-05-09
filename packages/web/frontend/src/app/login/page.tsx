@@ -31,20 +31,23 @@ export default function LoginPage() {
     setIsLoading(true);
     const result = await loginUser(formData);
 
-    if(result.success && result.user){
+    if(result.success && result.employee){
       router.refresh(); 
+      return;
     }
+
+    setIsLoading(false);
   };
 
   // Demo credentials
   const loginAsAdmin = () => {
-    setEmail("admin@company.com");
-    setPassword("admin123");
+    setEmail("bender@example.com");
+    setPassword("BiteMyShinyMetalAss123!");
   };
 
   const loginAsEmployee = () => {
-    setEmail("john.doe@company.com");
-    setPassword("pass123");
+    setEmail("johndoe@example.com");
+    setPassword("password123");
   };
 
   return (

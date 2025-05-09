@@ -6,6 +6,7 @@ services:
     container_name: frontend
     depends_on:
       - database
+      - pgadmin
     build:
       dockerfile: packages/web/frontend/Dockerfile
       context: .
@@ -14,6 +15,11 @@ services:
         - action: sync
           path: packages/web/frontend
           target: /app/packages/web/frontend
+          ignore:
+            - node_modules
+        - action: sync
+          path: packages/core
+          target: /app/packages/core
           ignore:
             - node_modules
         - action: rebuild

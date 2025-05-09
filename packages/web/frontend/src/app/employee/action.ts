@@ -3,8 +3,8 @@
 import { EmployeeHandler } from "@employee-salary-manager/core";
 import type { Employee } from "@employee-salary-manager/core";
 
-async function getEmployees(): Promise<Employee[]> {
-    return await EmployeeHandler.GetEmployees();
+async function GetEmployee(eid: string): Promise<Employee | undefined> {
+    return await EmployeeHandler.GetEmployee(eid);
 }
 
-export { getEmployees };
+export { GetEmployee };

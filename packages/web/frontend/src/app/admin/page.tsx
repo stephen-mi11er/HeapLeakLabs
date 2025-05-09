@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Auth, Employee, User, Utils } from "@/lib/index";
+import { Utils } from "@/lib/index";
 import { Header } from "@/components/header";
 import {
   Card,
@@ -39,6 +39,7 @@ import {
 } from "lucide-react";
 import { getCookie } from "cookies-next/client";
 import { getEmployees } from "./action";
+import { Employee, User } from "@employee-salary-manager/core";
   
 const getStatusBadge = (status: string) => {
   switch(status) {
@@ -62,7 +63,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userCookie = getCookie(Auth.userSessionCookie);
+      const userCookie = getCookie(Utils.USER_SESSION_COOKIE);
       setUser(JSON.parse(userCookie as string));
       const usersFromEffect = await getEmployees();
       setEmployees(usersFromEffect);
