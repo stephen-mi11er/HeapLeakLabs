@@ -3,8 +3,7 @@
   "scripts": {
     "migrate": "prisma migrate dev --schema=prisma/schema.prisma",
     "generate": "prisma generate --schema=prisma/schema.prisma",
-    "pull": "prisma db pull",
-    "seed": "ts-node prisma/seed.ts"
+    "pull": "prisma db pull"
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",

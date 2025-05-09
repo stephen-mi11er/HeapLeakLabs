@@ -35,7 +35,7 @@ services:
         done;
         echo '✅ Database up — pulling any changes';
         yarn db:pull;
-        echo '🛠️ Pull complete — generateing client';
+        echo '🛠️ Pull complete — generating client';
         yarn db:generate;
         echo '🚀 Starting Next.js…';
         yarn frontend:dev
