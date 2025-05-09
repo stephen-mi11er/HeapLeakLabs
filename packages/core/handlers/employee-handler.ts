@@ -29,9 +29,21 @@ class EmployeeHandler{
     }
 
     public static async VerifyUserCredentials(email: string, password: string): Promise<Employee | undefined> {
-        const employeeArray = await prisma.$queryRaw`SELECT * FROM Employees WHERE email = ${email} AND password = ${password}`;
+        // ⚠️ Directly building the SQL string from untrusted inputs can lead to SQL injection
+        // Example: if email is "bbender@planetexpress.com' OR '1'='1" and password is "password' ' OR email='bbender@planetexpress.com'--
+        // This would result in a query that logs in the attacker as the admin user
+        const unsafeQuery =
+            "SELECT * FROM Employees " +
+            "WHERE email = '" + email + "' " +
+            "AND password = '" + password + "'";
 
-        if(employeeArray?.length < 1) return undefined;
+        // ⚠️ Using $queryRawUnsafe allows SQL injection
+        const employeeArray: any[] = await prisma.$queryRawUnsafe(unsafeQuery);
+        
+
+        if (!employeeArray || employeeArray.length === 0) {
+            return undefined;
+        }
 
         return EmployeeHandler.decimalToNumber(employeeArray[0]);
     }
