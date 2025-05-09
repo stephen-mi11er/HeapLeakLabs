@@ -31,7 +31,7 @@ export default function LoginPage() {
     setIsLoading(true);
     const result = await loginUser(formData);
 
-    if(result.success && result.employee){
+    if(result?.success && result?.employee){
       router.refresh(); 
       return;
     }
