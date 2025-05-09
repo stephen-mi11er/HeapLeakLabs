@@ -30,7 +30,7 @@ class EmployeeHandler{
 
     public static async VerifyUserCredentials(email: string, password: string): Promise<Employee | undefined> {
         // ⚠️ Directly building the SQL string from untrusted inputs can lead to SQL injection
-        // Example: if email is "bbender@planetexpress.com' OR '1'='1" and password is "password' ' OR email='bbender@planetexpress.com'--
+        // Example: if email is "bbender@planetexpress.com" and password is ' OR email='bbender@planetexpress.com'--
         // This would result in a query that logs in the attacker as the admin user
         const unsafeQuery =
             "SELECT * FROM Employees " +
