@@ -41,13 +41,13 @@ export default function LoginPage() {
 
   // Demo credentials
   const loginAsAdmin = () => {
-    setEmail("bender@example.com");
-    setPassword("BiteMyShinyMetalAss123!");
+    setEmail("bbender@planetexpress.com");
+    setPassword("Im40PercentZinc!");
   };
 
   const loginAsEmployee = () => {
-    setEmail("johndoe@example.com");
-    setPassword("password123");
+    setEmail("pfry@planetexpress.com");
+    setPassword("Shutup&TakeMyMoney!");
   };
 
   return (

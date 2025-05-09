@@ -11,7 +11,7 @@ type Employee = {
   password: string;
   department: string;
   position: string;
-  hireDate: string;
+  hiredate: string;
   role: 'admin' | 'employee';
   status: 'active' | 'inactive' | 'on leave';
 };

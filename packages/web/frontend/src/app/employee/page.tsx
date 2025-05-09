@@ -38,7 +38,7 @@ export default function EmployeePage() {
     const fetchData = async () => {
       const userCookie = getCookie(Utils.USER_SESSION_COOKIE);
       const effectUser = JSON.parse(userCookie as string);
-      const effectEmployee = await GetEmployee(effectUser.eid);
+      const effectEmployee = await GetEmployee(effectUser.eid);      
       setUser(effectUser);
       setEmployee(effectEmployee);
     };
@@ -133,7 +133,11 @@ export default function EmployeePage() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Hire Date</p>
-                      <p className="font-medium">{employee.hireDate}</p>
+                      <p className="font-medium">{new Date(employee.hiredate).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 rounded-md border p-3 md:col-span-2 lg:col-span-2">
