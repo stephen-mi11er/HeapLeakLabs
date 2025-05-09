@@ -14,5 +14,4 @@ node_modules/
 certs
 
 # database
-/db-data/
-/pgadmin-data/
+packages/database/generated/

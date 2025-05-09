@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "frontend:build": "yarn workspace @employee-salary-manager/frontend build",
-    "frontend:dev": "yarn workspace @employee-salary-manager/frontend dev"
+    "frontend:dev": "yarn workspace @employee-salary-manager/frontend dev",
+    "db:generate": "yarn workspace @employee-salary-manager/database generate",
+    "db:pull": "yarn workspace @employee-salary-manager/database pull",
+    "db:seed": "yarn workspace @employee-salary-manager/database seed",
+    "db:migrate": "yarn workspace @employee-salary-manager/database migrate dev"
   },
   "workspaces": [
     "packages/**/*"

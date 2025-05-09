@@ -1,5 +1,11 @@
--- create a table for credentials
-CREATE TABLE Credentials(
+-- create the database itself
+CREATE DATABASE EMPLOYEE_SALARY_MANAGER;
+
+-- switch into it
+\connect EMPLOYEE_SALARY_MANAGER
+
+-- create a table for Users
+CREATE TABLE Users(
   id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name TEXT NOT NULL,
   eid TEXT NOT NULL,
@@ -14,7 +20,7 @@ CREATE TABLE Credentials(
 );
 
 -- add fake users
-INSERT INTO Credentials (name, eid, salary, birth, ssn, address, email, nickname, role, Password)
+INSERT INTO Users (name, eid, salary, birth, ssn, address, email, nickname, role, Password)
   VALUES 
   ('John Doe', 'EID001', 50000, '1985-01-15', '123-45-6789', '123 Elm St', 'johndoe@example.com', 'Johnny', 'employee', 'password123'),
   ('Jane Smith', 'EID002', 60000, '1990-02-20', '987-65-4321', '456 Oak St', 'janesmith@example.com', 'Janey', 'employee', 'securepass'),
