@@ -40,7 +40,7 @@ import {
 import { getCookie } from "cookies-next/client";
 import { getEmployees } from "./action";
 import { Employee, User } from "@employee-salary-manager/core";
-  
+
 const getStatusBadge = (status: string) => {
   switch(status) {
     case 'active':
