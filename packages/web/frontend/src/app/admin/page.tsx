@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Auth, employees, User, Utils } from "@/lib/index";
+import { Auth, Employee, User, Utils } from "@/lib/index";
 import { Header } from "@/components/header";
 import {
   Card,
@@ -19,14 +19,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Select,
   SelectContent,
   SelectItem,
@@ -40,16 +32,13 @@ import {
   Users, 
   DollarSign, 
   Building, 
-  MoreVertical,
   PlusCircle,
   SearchIcon,
   SlidersHorizontal,
   ListFilter,
-  Eye,
-  Edit,
-  UserRoundX
 } from "lucide-react";
 import { getCookie } from "cookies-next/client";
+import { getEmployees } from "./action";
   
 const getStatusBadge = (status: string) => {
   switch(status) {
@@ -69,10 +58,17 @@ export default function AdminPage() {
   const [departmentFilter, setDepartmentFilter] = useState<string>("all");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [employees, setEmployees] = useState<Employee[]>([]);
 
   useEffect(() => {
-    const userCookie = getCookie(Auth.userSessionCookie);
-    setUser(JSON.parse(userCookie as string))
+    const fetchData = async () => {
+      const userCookie = getCookie(Auth.userSessionCookie);
+      setUser(JSON.parse(userCookie as string));
+      const usersFromEffect = await getEmployees();
+      setEmployees(usersFromEffect);
+    };
+
+    fetchData();
   }, []);
 
   // Get unique departments for filtering
@@ -254,7 +250,6 @@ export default function AdminPage() {
                           <TableHead>Position</TableHead>
                           <TableHead className="text-right">Salary</TableHead>
                           <TableHead>Status</TableHead>
-                          <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -282,37 +277,6 @@ export default function AdminPage() {
                               </TableCell>
                               <TableCell>
                                 {getStatusBadge(employee.status)}
-                              </TableCell>
-                              <TableCell className="text-right">
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
-                                    <Button
-                                      variant="ghost"
-                                      className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100"
-                                    >
-                                      <span className="sr-only">Open menu</span>
-                                      <MoreVertical className="h-4 w-4" />
-                                    </Button>
-                                  </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="end">
-                                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                    <DropdownMenuItem>
-                                      <Eye className="mr-2 h-4 w-4" />
-                                      <span>View Details</span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                      <Edit className="mr-2 h-4 w-4" />
-                                      <span>Edit Employee</span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem
-                                      className="text-destructive focus:text-destructive"
-                                    >
-                                      <UserRoundX className="mr-2 h-4 w-4" />
-                                      <span>Deactivate</span>
-                                    </DropdownMenuItem>
-                                  </DropdownMenuContent>
-                                </DropdownMenu>
                               </TableCell>
                             </TableRow>
                           ))
