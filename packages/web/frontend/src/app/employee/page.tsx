@@ -39,8 +39,6 @@ export default function EmployeePage() {
       const userCookie = getCookie(Utils.USER_SESSION_COOKIE);
       const effectUser = JSON.parse(userCookie as string);
       const effectEmployee = await GetEmployee(effectUser.eid);
-      console.log({ effectUser, effectEmployee });
-      
       setUser(effectUser);
       setEmployee(effectEmployee);
     };
