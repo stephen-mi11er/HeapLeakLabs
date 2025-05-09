@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Employee, Utils, Auth, EmployeeService } from "@/lib/index";
+import { Utils } from "@/lib/index";
 import { Header } from "@/components/header";
 import {
   Card,
@@ -26,7 +26,8 @@ import {
   FileSpreadsheet
 } from "lucide-react";
 import { getCookie } from 'cookies-next/client';
-import type { User } from "@/lib/index"
+import type { User, Employee } from "@employee-salary-manager/core";
+import { GetEmployee } from "./action";
 
 export default function EmployeePage() {
   const [user, setUser] = useState<User | undefined>(undefined);
@@ -34,11 +35,14 @@ export default function EmployeePage() {
   
   
   useEffect(() => {
-    const userCookie = getCookie(Auth.userSessionCookie);
-    const effectUser = JSON.parse(userCookie as string);
-    const effectEmployee = EmployeeService.GetEmployee(effectUser.eid);
-    setUser(effectUser);
-    setEmployee(effectEmployee);
+    const fetchData = async () => {
+      const userCookie = getCookie(Utils.USER_SESSION_COOKIE);
+      const effectUser = JSON.parse(userCookie as string);
+      const effectEmployee = await GetEmployee(effectUser.eid);
+      setUser(effectUser);
+      setEmployee(effectEmployee);
+    };
+    fetchData();
   }, []);
 
   if (!employee) {

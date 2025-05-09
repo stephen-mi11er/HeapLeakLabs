@@ -15,8 +15,9 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Auth, type User } from "@/lib/index";
 import { deleteCookie } from "cookies-next/client";
+import { User } from "@employee-salary-manager/core";
+import { Utils } from "../lib";
 
 interface HeaderProps{
   user: User | undefined
@@ -27,7 +28,7 @@ export function Header({user}: HeaderProps) {
   const [open, setOpen] = useState(false);
   
   const handleLogout = () => {
-    deleteCookie(Auth.userSessionCookie);
+    deleteCookie(Utils.USER_SESSION_COOKIE);
     router.refresh()
   };
 
