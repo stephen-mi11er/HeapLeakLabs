@@ -24,7 +24,7 @@ CREATE TABLE Employees(
 );
 
 -- add fake Employees
-INSERT INTO Employees (name, eid, salary, birth, ssn, address, email, nickname, role, department, position, status, hireDate, Password)
+INSERT INTO Employees (name, eid, salary, birth, ssn, address, email, nickname, role, department, position, status, hiredate, Password)
 VALUES
   ('Philip J. Fry',                'EID001', 50000, '1974-08-14', '074-08-1974', 'St. Eliza''s Hospital, Delivery Room, New New York',    'pfry@planetexpress.com',     'Fry',      'employee',    'Delivery',    'Delivery Boy',       'active',   '3000-01-15', 'Shutup&TakeMyMoney!'),
   ('Turanga Leela',                'EID002', 60000, '2976-02-29', '229-02-2976', 'Planet Express Ship, Deck A, New New York',              'tleela@planetexpress.com',    'Leela',    'employee',    'Operations',  'Ship Captain',       'active',   '3000-02-28', 'LeelaRules!'),
