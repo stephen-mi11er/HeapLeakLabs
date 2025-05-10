@@ -15,8 +15,7 @@ Helping Developers Detect and Fix Exploits
   * [Start with Docker Compose](#start-with-docker-compose)
 * [Modifying Seed Data](#modifying-seed-data)
 * [Project Structure](#project-structure)
-* [Testing](#testing)
-* [Contributing](#contributing)
+* [Exploit Challenge](#exploit-challenge)
 * [License](#license)
 
 ---
@@ -113,9 +112,72 @@ PayTrack/
 └── README.md
 ```
 
+## Exploit Challenges 
+
+### Exploit SQL Injection in Credential Verification
+
+Can you spot the vulnerability in the following authentication logic?
+
+```typescript
+public static async VerifyUserCredentials(email: string, password: string): Promise<Employee | undefined> {
+    // ...existing code...
+    const unsafeQuery =
+        "SELECT * FROM Employees " +
+        "WHERE email = '" + email + "' " +
+        "AND password = '" + password + "'";
+
+    // ...existing code...
+    const employeeArray: any[] = await prisma.$queryRawUnsafe(unsafeQuery);
+    // ...existing code...
+}
+```
+
+**Challenge:**
+- What is the security flaw in this code?
+- How could an attacker exploit it to gain unauthorized access?
+- Can you gain access via the login screen?
+- How would you fix it?
+
+<details>
+<summary><strong>Reveal Answer</strong></summary>
+
+### Vulnerability: SQL Injection
+
+This code is vulnerable to SQL injection because it directly interpolates untrusted user input (`email` and `password`) into a raw SQL query string. An attacker can craft input that alters the query logic, bypassing authentication.
+
+**Example Attack:**
+- Email: `bbender@planetexpress.com`
+- Password: `' OR email='bbender@planetexpress.com'--`
+
+This input transforms the query into:
+
+```sql
+SELECT * FROM Employees WHERE email = 'bbender@planetexpress.com' AND password = '' OR email='bbender@planetexpress.com'--'
+```
+
+The `--` comments out the rest of the query, so the password check is bypassed, and the attacker logs in as the target user.
+
+### How to Fix
+- **Never** interpolate user input directly into SQL queries.
+- Use parameterized queries or Prisma's query builder:
+
+```typescript
+const employee = await prisma.employees.findFirst({
+  where: { email, password }
+});
+```
+
+Or, if using raw SQL, use `$queryRaw` with parameters:
+
+```typescript
+const employeeArray = await prisma.$queryRaw`SELECT * FROM Employees WHERE email = ${email} AND password = ${password}`;
+```
+
+</details>
+
 ## Contributing
 
-We welcome contributions that help improve HeapLeakLabs! Whether you’re submitting a bug fix, enhancing existing functionality, or adding new exploit detection scenarios, here’s how to get started:
+We welcome contributions that help improve PayTrack! Whether you’re submitting a new exploit, bug fix, or enhancing existing functionality, here’s how to get started:
 
 Fork the repository and create a exploit branch:
 
@@ -125,20 +187,18 @@ git checkout -b exploit/your-exploit-name
 
 Implement your changes:
 
-Bug fixes: Describe the issue, include steps to reproduce, and explain how your patch resolves it. Use the `bug/you-bug-name` branch naming convention.
-
 New exploits: Add or extend detection modules in packages/core, update database seed data under packages/database/init.sql to simulate the exploit, and create any necessary fixtures. Use the `exploit/you-exploit-name` branch naming convention.
 
-Write a detailed description: Write a detailed description on how to exploit the vulnerability you are submitting.
+Bug fixes: Describe the issue, include steps to reproduce, and explain how your patch resolves it. Use the `bug/you-bug-name` branch naming convention.
 
-Update documentation: Document new functionality or changes in this README, add usage examples, and update CHANGELOG.md if applicable.
+Write a detailed description: Write a detailed description on how to exploit the vulnerability you are submitting.
 
 Commit and push:
 
 ```bash
 git add .
 git commit -m 'feat: add detection for <exploit-name>'
-git push origin feature/your-feature-name
+git push origin exploit/your-exploit-name
 ```
 
 Open a Pull Request: Provide a clear title and description, link to any related issues, and request reviews from the core team.
