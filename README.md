@@ -20,7 +20,6 @@ PayTrack is an open-source platform designed to help developers discover, unders
 * [Modifying Seed Data](#modifying-seed-data)
 * [Exploit Challenges](#exploit-challenges)
    * [SQL Injection in Credential Verification](#sql-injection-in-credential-verification)
-* [Clone the Repository](#clone-the-repository)
 * [Contributing](#contributing)
 * [License](#license)
 
