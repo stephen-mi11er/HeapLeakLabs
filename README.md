@@ -16,6 +16,7 @@ PayTrack is an open-source platform designed to help developers discover, unders
 * [Modifying Seed Data](#modifying-seed-data)
 * [Project Structure](#project-structure)
 * [Exploit Challenges](#exploit-challenges)
+* [Contributing](#contributing)
 * [License](#license)
 
 ---
@@ -187,9 +188,9 @@ git checkout -b exploit/your-exploit-name
 
 Implement your changes:
 
-New exploits: Add or extend detection modules in packages/core, update database seed data under packages/database/init.sql to simulate the exploit, and create any necessary fixtures. Use the `exploit/you-exploit-name` branch naming convention.
+New exploits: Add or extend detection modules in packages/core, update database seed data under packages/database/init.sql to simulate the exploit, and create any necessary fixtures. Use the `exploit/your-exploit-name` branch naming convention.
 
-Bug fixes: Describe the issue, include steps to reproduce, and explain how your patch resolves it. Use the `bug/you-bug-name` branch naming convention.
+Bug fixes: Describe the issue, include steps to reproduce, and explain how your patch resolves it. Use the `bug/your-bug-name` branch naming convention.
 
 Write a detailed description: Write a detailed description on how to exploit the vulnerability you are submitting.
 
