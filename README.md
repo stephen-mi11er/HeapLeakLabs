@@ -8,13 +8,13 @@ PayTrack is an open-source platform designed to help developers discover, unders
 
 * [Features](#features)
 * [Architecture](#architecture)
+* [Project Structure](#project-structure)
 * [Prerequisites](#prerequisites)
 * [Getting Started](#getting-started)
   * [Clone the Repository](#clone-the-repository)
   * [Configure Environment Variables](#configure-environment-variables)
   * [Start with Docker Compose](#start-with-docker-compose)
 * [Modifying Seed Data](#modifying-seed-data)
-* [Project Structure](#project-structure)
 * [Exploit Challenges](#exploit-challenges)
 * [Contributing](#contributing)
 * [License](#license)
@@ -37,6 +37,19 @@ PayTrack is organized into three packages:
 3. **Frontend**: Next.js application with pages, components, and middleware.
 
 Services are orchestrated via `docker-compose.yml` to ensure consistent development environments.
+
+## Project Structure
+
+```
+PayTrack/
+├── packages/
+│   ├── core/       # Business logic, models, and handlers
+│   ├── database/   # Prisma schema, migrations, and seed data
+│   └── frontend/   # Next.js application
+├── docker-compose.yml
+├── .env.example
+└── README.md
+```
 
 ## Prerequisites
 
@@ -99,19 +112,6 @@ If you need to adjust the SQL seed data in `init.sql`:
    ```bash
    docker-compose up --build
    ```
-
-## Project Structure
-
-```
-PayTrack/
-├── packages/
-│   ├── core/       # Business logic, models, and handlers
-│   ├── database/   # Prisma schema, migrations, and seed data
-│   └── frontend/   # Next.js application
-├── docker-compose.yml
-├── .env.example
-└── README.md
-```
 
 ## Exploit Challenges 
 
