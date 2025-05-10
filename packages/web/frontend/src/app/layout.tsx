@@ -6,7 +6,7 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'PayTrack | Employee Salary Exploit Softwaret',
+  title: 'PayTrack | Employee Salary Exploit Software',
   description: 'Modern employee salary exploit software for the 21st century.',
   keywords: ['employee', 'salary', 'exploit', 'software'],
   icons: [
