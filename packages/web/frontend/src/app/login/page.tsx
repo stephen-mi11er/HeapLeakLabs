@@ -61,7 +61,7 @@ export default function LoginPage() {
           <Building2 className="h-12 w-12 text-primary" />
         </div>
         <h1 className="text-center text-3xl font-bold tracking-tight">PayTrack</h1>
-        <p className="text-center text-muted-foreground">Employee Salary Management</p>
+        <p className="text-center text-muted-foreground">Employee Salary Exploit Software</p>
       </div>
       
       <Card className="w-full max-w-md animate-in fade-in-50 slide-in-from-bottom-10 duration-500">
