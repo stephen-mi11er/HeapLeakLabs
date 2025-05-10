@@ -3,7 +3,7 @@ PayTrack: Open-source employee salary exploit simulation platform for web applic
 -->
 # PayTrack | Employee Salary Exploit Software
 
-PayTrack is an open-source platform designed to help developers discover, understand, and remediate real-world security exploits in real world web stacks. By simulating vulnerabilities and providing hands-on exploit challenges, PayTrack empowers you to sharpen your security skills and build more resilient applications.
+PayTrack is an open-source platform designed to help developers discover, understand, and remediate security exploits in real world web stacks. By simulating vulnerabilities and providing hands-on exploit challenges, PayTrack empowers you to sharpen your security skills and build more resilient applications.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) 
 
