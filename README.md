@@ -19,6 +19,8 @@ PayTrack is an open-source platform designed to help developers discover, unders
   * [Start with Docker Compose](#start-with-docker-compose)
 * [Modifying Seed Data](#modifying-seed-data)
 * [Exploit Challenges](#exploit-challenges)
+   * [SQL Injection in Credential Verification](#sql-injection-in-credential-verification)
+* [Clone the Repository](#clone-the-repository)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -118,7 +120,7 @@ If you need to adjust the SQL seed data in `init.sql`:
 
 ## Exploit Challenges 
 
-### Exploit SQL Injection in Credential Verification
+### SQL Injection in Credential Verification
 
 Can you spot the vulnerability in the following authentication logic?
 
