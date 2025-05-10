@@ -6,8 +6,9 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'PayTrack | Employee Salary Management',
-  description: 'Modern employee salary tracking application',
+  title: 'PayTrack | Employee Salary Exploit Softwaret',
+  description: 'Modern employee salary exploit software for the 21st century.',
+  keywords: ['employee', 'salary', 'exploit', 'software'],
   icons: [
     {rel: 'apple-touch-icon', sizes: '180x180', url: '/favicon/apple-touch-icon.png'},
     {rel: 'icon', type: 'image/png', sizes: '32x32', url: '/favicon/favicon-32x32.png'},
